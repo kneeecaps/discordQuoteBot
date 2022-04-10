@@ -32,7 +32,9 @@ Here is a list of all the dependancies:
 These can be installed by just running the command `pip install packageName`, for example: `pip install discord.py`. 
 I may have missed one or two dependancies but I think I got them all.
 
-If anything in this file is innacurate please tell me so I can fix it. 
+If anything in this file is innacurate please tell me so I can fix it. Also, it is worth noting that a big drawback of the main version of the bot is that it 
+only supports one quotes list. The SQL version has one quotes list per server, though this does not carry across to the main one.
+
 As a final note, the SQL version to my knowledge has not been updated to include some of the newer features in the other version.
 This is mainly because the server I was using to test the SQL version broke. 
 At some point I may update it to include newer features, right now it is 100% working, it just needs to have some other features added to it.
