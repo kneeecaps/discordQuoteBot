@@ -25,9 +25,13 @@ To do this, you just need to make a file called `quotes.data`.
 
 Then finally, you need to install all the dependancies for the bot.
 Here is a list of all the dependancies:
+
   -discord.py
+  
   -asyncio
+  
   -dataclasses
+  
   
 These can be installed by just running the command `pip install packageName`, for example: `pip install discord.py`. 
 I may have missed one or two dependancies but I think I got them all.
