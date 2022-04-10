@@ -7,7 +7,6 @@ import random as randomPY
 import asyncio
 import math
 
-from dotenv import load_dotenv
 from dataclasses import dataclass
 
 from commandFunctions import add_quote, search_quotes, get_quote, count_quotes, find_nth, restore_quotes
@@ -20,8 +19,9 @@ class quote:
     quote: str
     author: str
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+with open('TOKEN.txt', 'r') as f:
+    for line in f:
+        TOKEN = line
 
 client = commands.Bot(command_prefix = '!')
 
