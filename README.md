@@ -1,18 +1,18 @@
 # Discord Quote Bot
-This is a discord bot I did not like the bots other people made for the same purpose. This bot records quotes and can then search through these quotes and return quotes that match certain keywords or pick random quotes. The bot is pretty simple and can probably be optimized in many ways, but it works for what I want it to. I made the bot as a form of gateway so that my friends can all access and contribute to a quotes list though you can use it for whatever you see fit.
+This is a discord bot I made because I did not like the bots other people made for the same purpose. This bot records quotes and can then search through these quotes and return quotes that match certain keywords or pick random quotes. The bot is pretty simple and can probably be optimized in many ways, but it works for what I want it to. I made the bot as a form of gateway so that my friends can all access and contribute to a quotes list though you can use it for whatever you see fit.
 
 Included in this repository is the code for the bot, the image I am using as the bots profile picture and a .xcf file for if you want to change that picture.
 
 The bot is set up so that is more or less runs out of the box, all you need to do is:
 
-  -Add the bots token a text file
+  -Add the bots token as a text file
 
-  -Add a file for the bot to store quotes in (unless you are using the SQL version)
+  -Add a file for the bot to store quotes in (unless you are using the SQL version, then make a database)
 
   -Install the bots dependencies using pip
 
 
-PLEASE NOTE THAT THE INSTRUCTIONS BELOW ARE FOR THE BOT TO WORK AS SOON AS POSSIBLE WITH VERY LITTLE FOR YOU
+PLEASE NOTE THAT THE INSTRUCTIONS BELOW ARE FOR THE BOT TO WORK AS SOON AS POSSIBLE AND WITHOUT MUCH EXTRA EFFORT. THE BOT CAN GET BETTER PERFORMANCE BY COMPLETING A LONGER CONFIGURATION PROCESS BUT I WILL NOT EXPLAIN THAT HERE. 
 
 YOU CAN CHANGE THE NAMES OF THE FILES AND ALL THAT STUFF, BUT YOU WILL HAVE TO MODIFY THE CODE, WHAT IS LISTED BELOW IS JUST WHAT I HAVE USED
 
@@ -38,4 +38,4 @@ If you are using the SQL version of the bot, you also need to create a database 
 If anything in this file is inaccurate please tell me so I can fix it. Also, it is worth noting that a big drawback of the main version of the bot is that it
 only supports one quotes list. The SQL version has one quotes list per server, though this does not carry across to the main one.
 
-As a final note, the SQL version to my knowledge has not been updated to include some of the newer features in the other version. This is mainly because the  server I was using to test the SQL version broke. At some point I may update it to include newer features, right now it is 100% working, it just needs to have some other features added to it.
+As a final note, the SQL version to my knowledge has not been updated to include some of the newer features in the other version. This is mainly because the  server I was using to test the SQL version broke. At some point I may update it to include newer features, right now it is working, it just lacks some of the features the other version has.
