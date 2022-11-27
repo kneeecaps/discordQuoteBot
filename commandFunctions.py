@@ -22,7 +22,7 @@ def load_quotes():
 
 def restore_quotes():
     load_quotes()
-    serverID = 906306805842456596 #change this number to the id of the server you want to restore quotes to
+    serverID = 882080879248277595 #change this number to the id of the server you want to restore quotes to
     sql_command = f'''CREATE TABLE {'sID' + str(serverID)} (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
         quote varchar(255) NOT NULL,
@@ -33,7 +33,7 @@ def restore_quotes():
     for i in quotes:
         add_quote(i, serverID)
 
-connection = create_db_connection('localhost', 'root', 'root', 'quotes')
+connection = create_db_connection('localhost', 'user', 'user', 'quotes')
 
 def filter_content(content):
     content = content.replace('“', '"')
