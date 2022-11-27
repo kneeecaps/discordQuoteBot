@@ -136,25 +136,33 @@ async def get(ctx):
     messagePlace = 0
     message = await ctx.send(embed = messageContent[messagePlace])
 
+    await message.add_reaction('\u23ee')
     await message.add_reaction('\u25c0')
     await message.add_reaction('\u25b6')
+    await message.add_reaction('\u23ed')
 
     def check(reaction, user):
-        return user == ctx.author and str(reaction.emoji) in ['\u25c0', '\u25b6']
+        return user == ctx.author and str(reaction.emoji) in ['\u25c0', '\u25b6', '\u23ee', '\u23ed']
 
     while True:
         try:
-            reaction, user = await client.wait_for('reaction_add', timeout=60, check=check)
+            reaction, user = await client.wait_for('reaction_add', timeout = 60, check = check)
             if str(reaction.emoji) == '\u25b6' and messagePlace != len(messageContent) - 1:
                 messagePlace += 1
                 await message.edit(embed = messageContent[messagePlace])
                 await message.remove_reaction(reaction, user)
-
             elif str(reaction.emoji) == '\u25c0' and messagePlace > 0:
                 messagePlace -= 1
                 await message.edit(embed = messageContent[messagePlace])
                 await message.remove_reaction(reaction, user)
-
+            elif str(reaction.emoji) == '\u23ee':
+                messagePlace = 0
+                await message.edit(embed = messageContent[messagePlace])
+                await message.remove_reaction(reaction, user)
+            elif str(reaction.emoji) == '\u23ed':
+                messagePlace = len(messageContent) - 1
+                await message.edit(embed = messageContent[messagePlace])
+                await message.remove_reaction(reaction, user)
             else:
                 await message.remove_reaction(reaction, user)
         except asyncio.TimeoutError:
