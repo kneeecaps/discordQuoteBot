@@ -39,6 +39,11 @@ async def ping(ctx):
 
 @client.command()
 async def add(ctx):
+    ctx.message.content = ctx.message.content.replace('“', '"')
+    ctx.message.content = ctx.message.content.replace('”', '"')
+    ctx.message.content = ctx.message.content.replace('‘', '\'')
+    ctx.message.content = ctx.message.content.replace('’', '\'')
+
     if(ctx.message.content.count('"') != 4):
         await ctx.send('This command is formatted wrong. Please format it as `!add "quote" "author"`')
         return
