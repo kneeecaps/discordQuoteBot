@@ -1,5 +1,9 @@
 #commandFunctions.py
 
+#kludge fix to just stick a create_db_connection() in every function using sql
+#haven't finished testing this yet, but it should stop the sql timeout issue
+#a better fix might be try...catch in each function and create the connection if there is an error
+
 from sqlFunctions import create_db_connection, execute_query
 
 from dataclasses import dataclass
@@ -9,6 +13,7 @@ class quote:
     quote: str
     author: str
 
+#this is only here for the restore quotes function
 quotes = []
 def load_quotes():
     with open('quotes.data', 'r') as f:
@@ -20,6 +25,7 @@ def load_quotes():
 
             quotes.append(quote(line[quoteStart:quoteEnd], line[authorStart:authorEnd]))
 
+#this function takes quotes from the non sql version of the bot and loads them into a sql database
 def restore_quotes():
     load_quotes()
     serverID = 882080879248277595 #change this number to the id of the server you want to restore quotes to
@@ -33,17 +39,8 @@ def restore_quotes():
     for i in quotes:
         add_quote(i, serverID)
 
-connection = create_db_connection('localhost', 'user', 'user', 'quotes')
-
-def filter_content(content):
-    content = content.replace('“', '"')
-    content = content.replace('”', '"')
-    content = content.replace('‘', '"')
-    content = content.replace('’', '"')
-
-    return content
-
 def add_table(serverID):
+    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
     sql_command = f'''CREATE TABLE {serverID} (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
         quote varchar(255) NOT NULL,
@@ -53,6 +50,7 @@ def add_table(serverID):
     execute_query(connection, sql_command, 0)
 
 def add_quote(quote, serverID):
+    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
     db = 'sID' + str(serverID)
     sql_command = f'''INSERT INTO {db}
         (quote, author)
@@ -65,6 +63,7 @@ def add_quote(quote, serverID):
     print(f'Quote added: "{quote.quote}", {quote.author}')
 
 def search_quotes(search, serverID):
+    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
     db = 'sID' + str(serverID)
     sql_command = f'''SELECT * FROM {db}
     WHERE INSTR(quote, "{search}") > 0
@@ -79,6 +78,7 @@ def search_quotes(search, serverID):
     return result
 
 def get_quote(id, serverID):
+    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
     db = "sID" + str(serverID)
     sql_command = f'''SELECT quote, author FROM {db}
         WHERE id = {id};
@@ -91,6 +91,7 @@ def get_quote(id, serverID):
     return editedQuote
 
 def count_quotes(serverID):
+    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
     db = "sID" + str(serverID)
     sql_command = f'''SELECT COUNT(*) FROM {db};'''
 
