@@ -166,7 +166,7 @@ class quotes(commands.Cog):
                     await message.remove_reaction(reaction, user)
             except asyncio.TimeoutError:
                 break
-        await ctx.send(f'Get command for search "{search}" has timed out and the reactions will no longer work. Please use the command again if you want to scroll throught the pages again')
+        await ctx.send(f'Get command for search "{search}" has timed out and the reactions will no longer work. Please use the command again if you want to scroll through the pages again')
         print(f'get command used in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
     @commands.hybrid_command()
