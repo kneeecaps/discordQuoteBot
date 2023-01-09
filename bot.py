@@ -15,7 +15,7 @@ quoteColour = 0x12AEDE
 helpColour = 0xFF6600
 
 @dataclass
-class quote:
+class Quote:
     quote: str
     author: str
 
@@ -35,8 +35,11 @@ class quotes(commands.Cog):
   
     @commands.command()
     async def sync(self, ctx):
-        await client.tree.sync(guild=ctx.guild)
-        await ctx.send("Synced commands to current server.")
+        if(ctx.author.id == 365651769805635594):
+            await client.tree.sync()#guild=ctx.guild)
+            await ctx.send("Synced commands to current server.")
+        else: 
+            await ctx.send("You cannot do this command.")
 
     @commands.hybrid_command()
     async def ping(self, ctx):
@@ -45,28 +48,28 @@ class quotes(commands.Cog):
         await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
 
     @commands.hybrid_command()
-    async def add(self, ctx, Quote, Author):
+    async def add(self, ctx, quote, author):
         """Adds a quote to the bot's database."""
 
-        if(Quote == "" or Author == ""):
+        if(quote == "" or author == ""):
             await ctx.send('This command is formatted wrong. Please format it as `!add "quote" "author"`')
             return
 
-        if len(Quote) > 256:
+        if len(quote) > 256:
             await ctx.send(f'Your quote is longer than 256 characters and is unable to be processed :(')
             return
-        if len(Author) > 256:
+        if len(author) > 256:
             await ctx.send(f'Your author\'s name is longer than 256 characters and is unable to be processed :(')
             return
 
         try:
-            add_quote(quote(Quote, Author), ctx.guild.id)
+            add_quote(Quote(quote, author), ctx.guild.id)
         except:
             await ctx.send('shove off, this thing no work yet')
             return
 
-        embed = discord.Embed(title = f'"{Quote}"', description = f'-{Author}', color = quoteColour)
-        await ctx.send(f'Quote added!')
+        embed = discord.Embed(title = f'"{quote}"', description = f'-{author}', color = quoteColour)
+        await ctx.send(f'quote added!')
         await ctx.send(embed = embed)
 
     @commands.hybrid_command()
