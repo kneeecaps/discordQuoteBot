@@ -27,19 +27,24 @@ with open('TOKEN.txt', 'r') as f:
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = commands.Bot(intents=intents, command_prefix = '!')
+client = commands.Bot(intents=intents, command_prefix = '!') 
 
 class quotes(commands.Cog):
     def __init__(self, client):
         self.client = client
   
-    @commands.command()
+    @commands.hybrid_command()
+    async def sync(self, ctx):
+        await ctx.bot.tree.sync(guild=ctx.guild)
+        await ctx.send("Synced commands to current server.")
+
+    @commands.hybrid_command()
     async def ping(self, ctx):
         """Returns the ping of the bot."""
         print(f'Ping command used in channel "{ctx.channel.name}", "{ctx.guild.name}"')
         await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
 
-    @commands.command()
+    @commands.hybrid_command()
     async def add(self, ctx):
         """Adds a quote to the bot's database."""
         ctx.message.content = ctx.message.content.replace('“', '"')
@@ -76,7 +81,7 @@ class quotes(commands.Cog):
         await ctx.send(f'Quote added!')
         await ctx.send(embed = embed)
 
-    @commands.command()
+    @commands.hybrid_command()
     async def random(self, ctx, *, search = ""):
         """Returns a random quote from the bot's database."""
         if len(ctx.message.content) > 7:
@@ -106,7 +111,7 @@ class quotes(commands.Cog):
             await ctx.send(embed = embed)
         print(f'Random quote sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
-    @commands.command()
+    @commands.hybrid_command()
     async def get(self, ctx, *, search):
         """Returns every quote in the bot's database that matches a certain keyword"""
         searchQuotes = search_quotes(search, ctx.guild.id)
@@ -172,7 +177,7 @@ class quotes(commands.Cog):
         await ctx.send(f'Get command for search "{search}" has timed out and the reactions will no longer work. Please use the command again if you want to scroll throught the pages again')
         print(f'get command used in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
-    @commands.command()
+    @commands.hybrid_command()
     async def data(self, ctx):
         """Returns a list of all quotes in a .data file."""
         await ctx.send('Data command is currently not working since it is not configured for Maria yet.')
@@ -180,7 +185,7 @@ class quotes(commands.Cog):
         #print(f'Quotes data file sent in channel "{message.channel.name}", "{message.guild.name}"')
 
     client.remove_command('help')
-    @commands.command()
+    @commands.hybrid_command()
     async def help(self, ctx):
         """Explains the functions of each command."""
         embed = discord.Embed(title = 'Quote Bot Commands', description = 'List of commands for quote bot', color = helpColour)
