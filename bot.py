@@ -23,7 +23,11 @@ with open('TOKEN.txt', 'r') as f:
     for line in f:
         TOKEN = line
 
-client = commands.Bot(intents=discord.Intents.all(), command_prefix = '!')
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = commands.Bot(intents=intents, command_prefix = '!')
 
 @client.event
 async def on_ready():
