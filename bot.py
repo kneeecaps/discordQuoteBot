@@ -37,6 +37,7 @@ class quotes(commands.Cog):
     async def sync(self, ctx):
         if(ctx.author.id == 365651769805635594):
             await client.tree.sync()
+            print(f'Synced commands to server: "{ctx.guild.name}"')
             await ctx.send("Synced commands to current server.")
         else: 
             await ctx.send("You cannot do this command.")
