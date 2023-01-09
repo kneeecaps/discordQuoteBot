@@ -41,6 +41,7 @@ class quotes(commands.Cog):
 
     @commands.command()
     async def add(self, ctx):
+        """Adds a quote to the bot's database."""
         ctx.message.content = ctx.message.content.replace('“', '"')
         ctx.message.content = ctx.message.content.replace('”', '"')
         ctx.message.content = ctx.message.content.replace('‘', '\'')
@@ -76,10 +77,9 @@ class quotes(commands.Cog):
         await ctx.send(embed = embed)
 
     @commands.command()
-    async def random(self, ctx):
+    async def random(self, ctx, *, search = ""):
+        """Returns a random quote from the bot's database."""
         if len(ctx.message.content) > 7:
-            search = ctx.message.content[ctx.message.content.find(' ') + 1:]
-
             searchQuotes = search_quotes(search, ctx.guild.id)
             if searchQuotes == 0:
                 await ctx.send('There are no quotes added to this server, add some before trying to use this command')
@@ -107,8 +107,8 @@ class quotes(commands.Cog):
         print(f'Random quote sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
     @commands.command()
-    async def get(self, ctx):
-        search = ctx.message.content[ctx.message.content.find(' ') + 1:]
+    async def get(self, ctx, *, search):
+        """Returns every quote in the bot's database that matches a certain keyword"""
         searchQuotes = search_quotes(search, ctx.guild.id)
         if searchQuotes == 0:
             await ctx.send('There are no quotes added to this server, add some before trying to use this command')
@@ -174,6 +174,7 @@ class quotes(commands.Cog):
 
     @commands.command()
     async def data(self, ctx):
+        """Returns a list of all quotes in a .data file."""
         await ctx.send('Data command is currently not working since it is not configured for Maria yet.')
         #await ctx.send('Full quotes list:', file=discord.File('quotes.data'))
         #print(f'Quotes data file sent in channel "{message.channel.name}", "{message.guild.name}"')
@@ -181,6 +182,7 @@ class quotes(commands.Cog):
     client.remove_command('help')
     @commands.command()
     async def help(self, ctx):
+        """Explains the functions of each command."""
         embed = discord.Embed(title = 'Quote Bot Commands', description = 'List of commands for quote bot', color = helpColour)
         embed.add_field(name = '!help', value = 'Shows this message.', inline = False)
         embed.add_field(name = '!add', value = '''Adds a quote to the bot.\n
