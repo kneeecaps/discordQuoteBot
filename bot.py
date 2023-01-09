@@ -33,9 +33,9 @@ class quotes(commands.Cog):
     def __init__(self, client):
         self.client = client
   
-    @commands.hybrid_command()
+    @commands.command()
     async def sync(self, ctx):
-        await ctx.bot.tree.sync(guild=ctx.guild)
+        await client.tree.sync(guild=ctx.guild)
         await ctx.send("Synced commands to current server.")
 
     @commands.hybrid_command()
@@ -45,39 +45,27 @@ class quotes(commands.Cog):
         await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
 
     @commands.hybrid_command()
-    async def add(self, ctx):
+    async def add(self, ctx, Quote, Author):
         """Adds a quote to the bot's database."""
-        ctx.message.content = ctx.message.content.replace('“', '"')
-        ctx.message.content = ctx.message.content.replace('”', '"')
-        ctx.message.content = ctx.message.content.replace('‘', '\'')
-        ctx.message.content = ctx.message.content.replace('’', '\'')
 
-        if(ctx.message.content.count('"') != 4):
+        if(Quote == "" or Author == ""):
             await ctx.send('This command is formatted wrong. Please format it as `!add "quote" "author"`')
             return
 
-        quoteStart = find_nth(ctx.message.content, '"', 1) + 1
-        quoteEnd = find_nth(ctx.message.content, '"', 2)
-        authorStart = find_nth(ctx.message.content, '"', 3) + 1
-        authorEnd = find_nth(ctx.message.content, '"', 4)
-
-        quoteTxt = ctx.message.content[quoteStart:quoteEnd]
-        authorTxt = ctx.message.content[authorStart:authorEnd]
-
-        if len(quoteTxt) > 256:
+        if len(Quote) > 256:
             await ctx.send(f'Your quote is longer than 256 characters and is unable to be processed :(')
             return
-        if len(authorTxt) > 256:
+        if len(Author) > 256:
             await ctx.send(f'Your author\'s name is longer than 256 characters and is unable to be processed :(')
             return
 
         try:
-            add_quote(quote(quoteTxt, authorTxt), ctx.guild.id)
+            add_quote(quote(Quote, Author), ctx.guild.id)
         except:
             await ctx.send('shove off, this thing no work yet')
             return
 
-        embed = discord.Embed(title = f'"{ctx.message.content[quoteStart:quoteEnd]}"', description = f'-{ctx.message.content[authorStart:authorEnd]}', color = quoteColour)
+        embed = discord.Embed(title = f'"{Quote}"', description = f'-{Author}', color = quoteColour)
         await ctx.send(f'Quote added!')
         await ctx.send(embed = embed)
 
