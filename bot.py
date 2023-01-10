@@ -9,7 +9,7 @@ import math
 
 from dataclasses import dataclass
 
-from commandFunctions import add_quote, search_quotes, get_quote, count_quotes, find_nth, restore_quotes
+from commandFunctions import add_quote, search_quotes, get_quote, count_quotes, restore_quotes
 
 quoteColour = 0x12AEDE
 helpColour = 0xFF6600
