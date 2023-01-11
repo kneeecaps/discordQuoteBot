@@ -11,9 +11,6 @@ The bot is set up so that is more or less runs out of the box, all you need to d
 
   -Install the bots dependencies using pip
 
-
-PLEASE NOTE THAT THE INSTRUCTIONS BELOW ARE FOR THE BOT TO WORK AS SOON AS POSSIBLE AND WITHOUT MUCH EXTRA EFFORT. THE BOT CAN GET BETTER PERFORMANCE BY COMPLETING A LONGER CONFIGURATION PROCESS BUT I WILL NOT EXPLAIN THAT HERE. 
-
 YOU CAN CHANGE THE NAMES OF THE FILES AND ALL THAT STUFF, BUT YOU WILL HAVE TO MODIFY THE CODE, WHAT IS LISTED BELOW IS JUST WHAT I HAVE USED
 
 Add the bot's token, which you should get from the discord developer website, to a file called `TOKEN.txt`.
