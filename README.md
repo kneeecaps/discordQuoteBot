@@ -9,10 +9,7 @@ The bot is set up so that is more or less runs out of the box, all you need to d
 
   -Add a file for the bot to store quotes in (unless you are using the SQL version, then make a database)
 
-  -Install the bots dependencies using pip
-
-
-PLEASE NOTE THAT THE INSTRUCTIONS BELOW ARE FOR THE BOT TO WORK AS SOON AS POSSIBLE AND WITHOUT MUCH EXTRA EFFORT. THE BOT CAN GET BETTER PERFORMANCE BY COMPLETING A LONGER CONFIGURATION PROCESS BUT I WILL NOT EXPLAIN THAT HERE. 
+  -Install the bots dependencies using pip 
 
 YOU CAN CHANGE THE NAMES OF THE FILES AND ALL THAT STUFF, BUT YOU WILL HAVE TO MODIFY THE CODE, WHAT IS LISTED BELOW IS JUST WHAT I HAVE USED
 
@@ -38,4 +35,4 @@ If you are using the SQL version of the bot, you also need to create a database 
 If anything in this file is inaccurate please tell me so I can fix it. Also, it is worth noting that a big drawback of the main version of the bot is that it
 only supports one quotes list. The SQL version has one quotes list per server, though this does not carry across to the main one.
 
-As a final note, the SQL version to my knowledge has not been updated to include some of the newer features in the other version. This is mainly because the  server I was using to test the SQL version broke. At some point I may update it to include newer features, right now it is working, it just lacks some of the features the other version has.
+As a final note, the SQL version is currently quite a few updates ahead of the main version just because I am currently using the SQL verion. I havenot merged it with main yet because I would still like there to be a version of the bot for people who don't want a database, but I haven't gotten around to swapping the branches yet. 
