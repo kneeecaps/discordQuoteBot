@@ -76,7 +76,8 @@ class quotes(commands.Cog):
     @commands.hybrid_command()
     async def random(self, ctx, *, search = ""):
         """Returns a random quote from the bot's database."""
-        if len(ctx.message.content) > 7:
+        if search != "":
+            print(f'{search} hello')
             searchQuotes = search_quotes(search, ctx.guild.id)
             if searchQuotes == 0:
                 await ctx.send('There are no quotes added to this server, add some before trying to use this command')
@@ -101,7 +102,7 @@ class quotes(commands.Cog):
 
             embed = discord.Embed(title = f'"{get_quote(quoteID, ctx.guild.id).quote}"', description = f'-{get_quote(quoteID, ctx.guild.id).author}', color = quoteColour)
             await ctx.send(embed = embed)
-        print(f'Random quote sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
+        print(f'Random quote sent in channel "{ctx.channel.name}", "{ctx.guild.name}" with search "{search}"')
 
     @commands.hybrid_command()
     async def get(self, ctx, *, search):
