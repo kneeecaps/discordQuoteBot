@@ -77,7 +77,6 @@ class quotes(commands.Cog):
     async def random(self, ctx, *, search = ""):
         """Returns a random quote from the bot's database."""
         if search != "":
-            print(f'{search} hello')
             searchQuotes = search_quotes(search, ctx.guild.id)
             if searchQuotes == 0:
                 await ctx.send('There are no quotes added to this server, add some before trying to use this command')
