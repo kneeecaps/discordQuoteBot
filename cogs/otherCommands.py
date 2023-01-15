@@ -3,6 +3,8 @@
 import discord
 from discord.ext import commands
 
+from sqlFunctions import create_db_connection, execute_query
+
 helpColour = 0xFF6600
 
 class otherCommands(commands.Cog):
@@ -24,6 +26,28 @@ class otherCommands(commands.Cog):
             await ctx.send("Synced commands to current server.")
         else: 
             await ctx.send("You cannot do this command.")
+
+    @commands.hybrid_command()
+    async def prefix(self, ctx, new_prefix):
+        """Changes the prefix of the bot"""
+
+        if(len(new_prefix) > 3):
+            await ctx.send("New prefix is too long. Try a shorter one.")
+            return
+
+        connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+        sql_command = f"""SELECT prefix FROM prefixes WHERE sID = '{ctx.guild.id}';"""
+
+        prefix = execute_query(connection, sql_command, 2)
+
+        if(not prefix):
+            sql_command = f"""INSERT INTO prefixes (sID, prefix) VALUES ('{ctx.guild.id}', '{new_prefix}');"""
+        else:
+            sql_command = f"""UPDATE prefixes SET prefix = '{new_prefix}' WHERE sID = '{ctx.guild.id}';"""
+
+        execute_query(connection, sql_command, 0)
+
+        await ctx.send(f'Prefix successfully changed to "{new_prefix}"')
 
     @commands.hybrid_command()
     async def ping(self, ctx):
