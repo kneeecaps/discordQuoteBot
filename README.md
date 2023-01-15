@@ -32,6 +32,8 @@ These can be installed by just running the command `pip install packageName`, fo
 
 If you are using the SQL version of the bot, you also need to create a database for the bot to read and write to. To do this, you may need to reconfigure the bot. The version of the bot I was using for testing (and the one which is one the repository at the time of writing this) is configured to run with a database saved on localhost by the name of `quotes`. I used mariadb to test this as well, though the code should work with most other databases. I would also like to say, that I would not recommend using the SQL version if you don't know at least basic programming. It does need a little more skill than the other version.
 
+With the new update to the bot using per server prefixes, you need to create a table for the prefixes to be stored in. The bot will not automatically create this table. To get the table to be the same as the one I used for testing, use your database and run the command `CREATE TABLE prefixes ( sID varchar(255) PRIMARY KEY NOT NULL, prefix varchar(10) NOT NULL );`. This command will create a table that I have verified to work for prefixes, some of the values allow more data than is needed, for example prefix's length is set to 10 but the bot allows a maximum of 3. You can lower the numbers to optimize it if you want, but it works with the higher values.
+
 If anything in this file is inaccurate please tell me so I can fix it. Also, it is worth noting that a big drawback of the main version of the bot is that it
 only supports one quotes list. The SQL version has one quotes list per server, though this does not carry across to the main one.
 
