@@ -114,7 +114,7 @@ class Commands(commands.Cog):
 
         if pageCount == 0:
             pageCount = 1
-            
+
         messageContent = []
         embed = discord.Embed(title = f'Quotes - Part 1/{pageCount}', description = f'Search: {search}', color = quoteColour)
         for i in range(len(searchQuotes)):
@@ -164,7 +164,7 @@ class Commands(commands.Cog):
             except asyncio.TimeoutError:
                 break
         await ctx.send(f'Get command for search "{search}" has timed out and the reactions will no longer work. Please use the command again if you want to scroll through the pages again')
-        print(f'get command used in channel "{ctx.channel.name}", "{ctx.guild.name}"')
+        print(f'get command used in channel "{ctx.channel.name}", "{ctx.guild.name}" with search "{search}"')
 
     @commands.hybrid_command()
     async def data(self, ctx):
