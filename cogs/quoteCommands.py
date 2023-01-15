@@ -1,4 +1,4 @@
-#commands.py
+#quoteCommands.py
 
 import discord
 from discord.ext import commands
@@ -17,7 +17,7 @@ class Quote:
     quote: str
     author: str
 
-class Commands(commands.Cog):
+class quoteCommands(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -206,4 +206,4 @@ class Commands(commands.Cog):
         print(f'Help command sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
 async def setup(client):
-    await client.add_cog(Commands(client))
+    await client.add_cog(quoteCommands(client))
