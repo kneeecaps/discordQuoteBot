@@ -1,38 +1,35 @@
 # Discord Quote Bot
-This is a discord bot I made because I did not like the bots other people made for the same purpose. This bot records quotes and can then search through these quotes and return quotes that match certain keywords or pick random quotes. The bot is pretty simple and can probably be optimized in many ways, but it works for what I want it to. I made the bot as a form of gateway so that my friends can all access and contribute to a quotes list though you can use it for whatever you see fit.
 
-Included in this repository is the code for the bot, the image I am using as the bots profile picture and a .xcf file for if you want to change that picture.
+## About
+This is a discord bot I made that can record and keep track of quotes people have said. This was originally made as a bit of a joke between me and my friends so we could take some things said out of context later for some laughs, but I have put the code on github in case anyone else wants to use it for anything.
 
-The bot is set up so that it more or less runs out of the box, all you need to do is:
+The bot has two main versions of it, you can get the code for each version from the branches page on github. The first version (in branch main) uses a database to store the quotes as well as prefixes for each server, the second version (in branch textFileVersion) uses a text file instead of a database. The version of the bot that uses a text file is both slower and a bit outdated, but it is much easier to set up and use if you are not too good with technology. This version is a bit outdated because once I was able to get a server that can host the database, I put my full attention to the database version. I have no intention of updating the textFileVersion anymore, but if anyone wanted to port some features over I would probably approve pull requests.
 
-  -Add the bots token as a text file
+## Setup guide
 
-  -Add a file for the bot to store quotes in (unless you are using the SQL version, then make a database)
+To get the bot running, you need to do five main things: 
+* Download the code for the bot
+* Install the dependancies for the bot
+* Create a database if you are using the database version or the text file if you are using that version
+* Get a token for the bot and store that in the right file
+* Start the bot
 
-  -Install the bots dependencies using pip 
+Here is a basic guide on how to get the bot running: 
 
-YOU CAN CHANGE THE NAMES OF THE FILES AND ALL THAT STUFF, BUT YOU WILL HAVE TO MODIFY THE CODE, WHAT IS LISTED BELOW IS JUST WHAT I HAVE USED
+1. The first thing you need to do to is download the code from the bot. Download the code from github and extract it into the directory you want the bot to be running from. Make sure the the bot has the required permissions to read and write in the directory you extract it to. If you are running windows, this should be done automatically, for linux users, you should be able to google how to do this and I have no idea how to do it on other operating systems. 
 
-Add the bot's token, which you should get from the discord developer website, to a file called `TOKEN.txt`.
+2. Once you have the code downloaded, you need to install the bot's dependancies for it to work. The quote bot's dependancies can be installed with pip by using the syntax `pip install *dependancy_name*`. Make sure you install all of them otherwise it will not work. Here is a list of the bot's dependancies:
+  * discord.py
+  * asyncio
+  * dataclasses
+  * mysql-connector-python (only needed if you are using the database version)
+  
+3. The bot will need a place to store quotes (and prefixes if you are using the database version) so now is the time to set that up. I will explain how to do this for both versions here. 
 
-The next thing you need to do to set up the bot is to make a file for it to store its quotes in (unless as I stated earlier you are using the SQL version). To do this, you just need to make a file called `quotes.data`.
+  * If you are using the text file version, just make a file in the directory the code is in called `quotes.data` and you should be done. 
 
-Then finally, you need to install all the dependencies for the bot. Here is a list of all the dependencies:
+  * If you are using the database version, in commandFunctions.py near the top of the file are four variables set to the credentials needed for the database. You can configure your database to work with these credentials if you want (although using user as both the username and password isn't very secure), or you can change those values for whatever you need them to be. Once you have made a database that the bot has access to and configured the credentials in commandFunctions.py, the last thing you need to do is create a table in that database to store server prefixes. The bot will automatically create tables for quotes, but it will not do it automatically for prefixes. I used the command `CREATE TABLE prefixes ( sID varchar(255) PRIMARY KEY NOT NULL, prefix varchar(10) NOT NULL );` to create this table for me, you can use it too but if you really wanted to save space you can lower the amount of data reserved for each column. The bot will not add any prefix longer than 3 characters but this table has space for 10 and I am pretty sure there aren't any server ids that are 255 characters long, if you want you can change this but what I put above is what I have tested to work. 
 
-  -discord.py
+4. Next, you need to get a token for your bot. You get this from the [Discord Developer Page](https://discord.com/developers/applications) by creating an application and going to the bot tab. If you need more help with this, any guide about how to make a discord bot will have images and more in depth details on how to do this. While you are on this page, it is also good to invite the bot to a test server from the oauth2 tab. Again, if you are having trouble with this any guide on how to make a bot will have more details.
 
-  -asyncio
-
-  -dataclasses
-
-  -mysql-connector-python (only needed if using SQL version)
-
-
-These can be installed by just running the command `pip install packageName`, for example: `pip install discord.py`. I may have missed one or two dependencies but I think I got them all.
-
-If you are using the SQL version of the bot, you also need to create a database for the bot to read and write to. To do this, you may need to reconfigure the bot. The version of the bot I was using for testing (and the one which is one the repository at the time of writing this) is configured to run with a database saved on localhost by the name of `quotes`. I used mariadb to test this as well, though the code should work with most other databases. I would also like to say, that I would not recommend using the SQL version if you don't know at least basic programming. It does need a little more skill than the other version.
-
-If anything in this file is inaccurate please tell me so I can fix it. Also, it is worth noting that a big drawback of the main version of the bot is that it
-only supports one quotes list. The SQL version has one quotes list per server, though this does not carry across to the main one.
-
-As a final note, the SQL version is currently quite a few updates ahead of the main version just because I am currently using the SQL verion. I havenot merged it with main yet because I would still like there to be a version of the bot for people who don't want a database, but I haven't gotten around to swapping the branches yet. 
+5. Finally, just start the bot. Using a command line, navigate to the directory where you put the bot's code and run the command `python bot.py`. If you have done everything right, within a few seconds it should tell you that the bot is online and you should see it pop up in your server. If this command spits out an error, you have most likely forgotten to install a dependancy or messed up the configuration of the database. I would also recommend running a few of the commands in a test server, because if the database is configured incorrectly you may not notice until a certain command is run. If you have any trouble with this configuration, just create an issue on github and I can try to help you fix it. 
