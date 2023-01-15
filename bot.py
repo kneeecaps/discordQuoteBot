@@ -19,7 +19,10 @@ class Client(commands.Bot):
 
     async def setup_hook(self):
         client.remove_command('help')
-        await client.load_extension("commands")
+
+        for f in os.listdir("./cogs"):
+            if f.endswith(".py"):
+                await client.load_extension("cogs." + f[:-3])
 
 
 client = Client()
