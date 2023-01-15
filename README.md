@@ -3,7 +3,7 @@ This is a discord bot I made because I did not like the bots other people made f
 
 Included in this repository is the code for the bot, the image I am using as the bots profile picture and a .xcf file for if you want to change that picture.
 
-The bot is set up so that is more or less runs out of the box, all you need to do is:
+The bot is set up so that it more or less runs out of the box, all you need to do is:
 
   -Add the bots token as a text file
 
