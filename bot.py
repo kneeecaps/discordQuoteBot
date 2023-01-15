@@ -24,6 +24,8 @@ class Client(commands.Bot):
 
 client = Client()
 
-#restore_quotes()
+#uncomment this if you want to add quotes from the text file version to a sql database
+#Make sure you configured server id in the function definition in commandFunctions.py first
+#restore_quotes() 
 
 client.run(TOKEN)
