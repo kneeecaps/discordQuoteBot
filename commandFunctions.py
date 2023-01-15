@@ -13,6 +13,12 @@ class quote:
     quote: str
     author: str
 
+#change these to your values
+dbHost = "localhost"
+dbUser = "user"
+dbPasswd = "user"
+dbName = "quotes"
+
 #this is only here for the restore quotes function
 quotes = []
 def load_quotes():
@@ -40,7 +46,7 @@ def restore_quotes():
         add_quote(i, serverID)
 
 def add_table(serverID):
-    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+    connection = create_db_connection(dbHost, dbUser, dbPasswd, dbName)
     sql_command = f'''CREATE TABLE {serverID} (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
         quote varchar(255) NOT NULL,
@@ -50,7 +56,7 @@ def add_table(serverID):
     execute_query(connection, sql_command, 0)
 
 def add_quote(quote, serverID):
-    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+    connection = create_db_connection(dbHost, dbUser, dbPasswd, dbName)
     db = 'sID' + str(serverID)
     sql_command = f'''INSERT INTO {db}
         (quote, author)
@@ -63,7 +69,7 @@ def add_quote(quote, serverID):
     print(f'Quote added: "{quote.quote}", {quote.author}')
 
 def search_quotes(search, serverID):
-    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+    connection = create_db_connection(dbHost, dbUser, dbPasswd, dbName)
     db = 'sID' + str(serverID)
     sql_command = f'''SELECT * FROM {db}
     WHERE INSTR(quote, "{search}") > 0
@@ -78,7 +84,7 @@ def search_quotes(search, serverID):
     return result
 
 def get_quote(id, serverID):
-    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+    connection = create_db_connection(dbHost, dbUser, dbPasswd, dbName)
     db = "sID" + str(serverID)
     sql_command = f'''SELECT quote, author FROM {db}
         WHERE id = {id};
@@ -91,7 +97,7 @@ def get_quote(id, serverID):
     return editedQuote
 
 def count_quotes(serverID):
-    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+    connection = create_db_connection(dbHost, dbUser, dbPasswd, dbName)
     db = "sID" + str(serverID)
     sql_command = f'''SELECT COUNT(*) FROM {db};'''
 
