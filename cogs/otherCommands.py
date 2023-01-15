@@ -5,6 +5,8 @@ from discord.ext import commands
 
 from sqlFunctions import create_db_connection, execute_query
 
+import config
+
 helpColour = 0xFF6600
 
 class otherCommands(commands.Cog):
@@ -35,7 +37,7 @@ class otherCommands(commands.Cog):
             await ctx.send("New prefix is too long. Try a shorter one.")
             return
 
-        connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+        connection = create_db_connection(config.dbHost, config.dbUser, config.dbPasswd, config.dbName)
         sql_command = f"""SELECT prefix FROM prefixes WHERE sID = '{ctx.guild.id}';"""
 
         prefix = execute_query(connection, sql_command, 2)

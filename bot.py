@@ -7,12 +7,14 @@ from discord.ext import commands
 from commandFunctions import restore_quotes
 from sqlFunctions import create_db_connection, execute_query
 
+import config
+
 with open('TOKEN.txt', 'r') as f:
     for line in f:
         TOKEN = line
 
 def get_prefix(client, ctx):
-    connection = create_db_connection('localhost', 'user', 'user', 'quotes')
+    connection = create_db_connection(config.dbHost, config.dbUser, config.dbPasswd, config.dbName)
     sql_command = f"""SELECT prefix FROM prefixes WHERE sID = '{ctx.guild.id}';"""
 
     prefix = execute_query(connection, sql_command, 2)
