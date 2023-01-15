@@ -17,7 +17,7 @@ class quote:
 dbHost = "localhost"
 dbUser = "user"
 dbPasswd = "user"
-dbName = "quotes"
+dbName = "quoteBot"
 
 #this is only here for the restore quotes function
 quotes = []
