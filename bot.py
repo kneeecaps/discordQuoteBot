@@ -24,6 +24,7 @@ def get_prefix(client, ctx):
     else:
         prefix = prefix[0]
 
+    connection.close()
     return prefix
 
 

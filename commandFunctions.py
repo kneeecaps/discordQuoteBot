@@ -39,6 +39,7 @@ def restore_quotes():
     );
     '''
     execute_query(connection, sql_command, 0)
+    connection.close()
     for i in quotes:
         add_quote(i, serverID)
 
@@ -51,6 +52,7 @@ def add_table(serverID):
         );
     '''
     execute_query(connection, sql_command, 0)
+    connection.close()
 
 def add_quote(quote, serverID):
     connection = create_db_connection(config.dbHost, config.dbUser, config.dbPasswd, config.dbName)
@@ -63,6 +65,7 @@ def add_quote(quote, serverID):
         add_table(db)
         add_quote(quote, serverID)
         return
+    connection.close()
     print(f'Quote added: "{quote.quote}", {quote.author}')
 
 def search_quotes(search, serverID):
@@ -78,6 +81,7 @@ def search_quotes(search, serverID):
         return 0
     result = list(result)
 
+    connection.close()
     return result
 
 def get_quote(id, serverID):
@@ -91,6 +95,7 @@ def get_quote(id, serverID):
 
     editedQuote = quote(foundQuote[0], foundQuote[1])
 
+    connection.close()
     return editedQuote
 
 def count_quotes(serverID):
@@ -103,6 +108,7 @@ def count_quotes(serverID):
         return 0
     count = count[0]
 
+    connection.close()
     return count
 
 def find_nth(string, substr, n):

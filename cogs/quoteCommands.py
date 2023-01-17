@@ -174,6 +174,8 @@ class quoteCommands(commands.Cog):
         f.close()
         await ctx.send('Full quotes list in format: id, "quote", "author"', file=discord.File('quotes.data'))
         os.remove("quotes.data")
+        connection.close()
+        
         print(f'Quotes data file sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
 async def setup(client):

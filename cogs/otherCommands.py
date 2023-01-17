@@ -48,6 +48,7 @@ class otherCommands(commands.Cog):
             sql_command = f"""UPDATE prefixes SET prefix = '{new_prefix}' WHERE sID = '{ctx.guild.id}';"""
 
         execute_query(connection, sql_command, 0)
+        connection.close()
 
         await ctx.send(f'Prefix successfully changed to "{new_prefix}"')
 
