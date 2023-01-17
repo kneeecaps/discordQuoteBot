@@ -58,19 +58,12 @@ class otherCommands(commands.Cog):
         await ctx.send(f'Pong! {round(self.client.latency * 1000)}ms')
 
     @commands.hybrid_command()
-    async def data(self, ctx):
-        """Returns a list of all quotes in a .data file."""
-        await ctx.send('Data command is currently not working since it is not configured for MariaDB yet.')
-        #await ctx.send('Full quotes list:', file=discord.File('quotes.data'))
-        #print(f'Quotes data file sent in channel "{message.channel.name}", "{message.guild.name}"')
-
-    @commands.hybrid_command()
     async def help(self, ctx):
         """Explains the functions of each command."""
         embed = discord.Embed(title = 'Quote Bot Commands', description = 'List of commands for quote bot', color = helpColour)
         embed.add_field(name = '!help', value = 'Shows this message.', inline = False)
         embed.add_field(name = '!add', value = '''Adds a quote to the bot.\n
-            The quote cannot have any double quotes (") in it.\n
+            Quotes spanning multiple lines will not work if you use / commands. Use prefix commands for these quotes.\n
             It does not matter how this command is sent as long as it starts with !add and the quote is before the author.\n
             USAGE: !add "quote" "author"
             ''', inline = False)
@@ -83,9 +76,8 @@ class otherCommands(commands.Cog):
             USAGE: !get porkchops
             ''', inline = False)
         embed.add_field(name = '!data', value = '''Sends a file with every recorded quote written in it.\n
-            The quotes are written in the format of "quote" "author" and there is one quote per line.\n
-            The file extention is ".data" though the quotes are written in plain text so any text editor should be able to read it.\n
-            Please note: The data command currently does not support MariaDB, I will eventually fix it though
+            The quotes are written in the format of {id, "quote", "author"} and there is one quote per line.\n
+            The file extention is ".data" but the quotes are written in plain text so any text editor should be able to read it.\n
         ''', inline = False)
         embed.add_field(name = 'NOTES', value = '''All commands are case sensitive and use the camel hump naming system.\n
             Both the quote and the author section of the add command have a limit of 256 characters\n

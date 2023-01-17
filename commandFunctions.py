@@ -30,6 +30,7 @@ def load_quotes():
 #this function takes quotes from the non sql version of the bot and loads them into a sql database
 def restore_quotes():
     load_quotes()
+    connection = create_db_connection(config.dbHost, config.dbUser, config.dbPasswd, config.dbName)
     serverID = 882080879248277595 #change this number to the id of the server you want to restore quotes to
     sql_command = f'''CREATE TABLE {'sID' + str(serverID)} (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,

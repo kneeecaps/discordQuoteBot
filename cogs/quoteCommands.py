@@ -6,8 +6,12 @@ from dataclasses import dataclass
 import random as randomPY
 import asyncio
 import math
+import os
 
 from commandFunctions import add_quote, search_quotes, get_quote, count_quotes
+from sqlFunctions import create_db_connection, execute_query
+
+import config
 
 quoteColour = 0x12AEDE
 
@@ -144,6 +148,33 @@ class quoteCommands(commands.Cog):
                 break
         await ctx.send(f'Get command for search "{search}" has timed out and the reactions will no longer work. Please use the command again if you want to scroll through the pages again')
         print(f'get command used in channel "{ctx.channel.name}", "{ctx.guild.name}" with search "{search}"')
+
+    @commands.hybrid_command()
+    async def data(self, ctx):
+        """Returns a list of all quotes in a .data file."""
+        await ctx.send("Generating data file from quotes database. Depending on the size of the quotes database, this may take a while.")
+
+        connection = create_db_connection(config.dbHost, config.dbUser, config.dbPasswd, config.dbName)
+
+        sID = "sID" + str(ctx.guild.id)
+        sql_command = f"select * from {sID}"
+        results = execute_query(connection, sql_command, 1)
+
+        output = ""
+
+        for i in results:
+            quote = f'{i[0]}, "{i[1]}", "{i[2]}"'
+            quote = quote.replace("\n", "!!NEW_LINE!!")
+            quote += '\n'
+
+            output += quote
+
+        f = open("quotes.data", "w")
+        f.write(output)
+        f.close()
+        await ctx.send('Full quotes list in format: id, "quote", "author"', file=discord.File('quotes.data'))
+        os.remove("quotes.data")
+        print(f'Quotes data file sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
 async def setup(client):
     await client.add_cog(quoteCommands(client))
