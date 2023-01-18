@@ -76,9 +76,9 @@ class otherCommands(commands.Cog):
             The keyword can be the name of the person who said the quote or a section of the quote.\n
             USAGE: !get porkchops
             ''', inline = False)
-        embed.add_field(name = '!data', value = '''Sends a file with every recorded quote written in it.\n
-            The quotes are written in the format of {id, "quote", "author"} and there is one quote per line.\n
-            The file extention is ".data" but the quotes are written in plain text so any text editor should be able to read it.\n
+        embed.add_field(name = '!data', value = '''Sends a file with every recorded quote from the current server written in it.\n
+            The file is in csv format so it can easily be imported into another program if needed.\n
+            This format is also used because discord can work with it in program.\n
         ''', inline = False)
         embed.add_field(name = 'NOTES', value = '''All commands are case sensitive and use the camel hump naming system.\n
             Both the quote and the author section of the add command have a limit of 256 characters\n

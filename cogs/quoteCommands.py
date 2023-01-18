@@ -169,13 +169,13 @@ class quoteCommands(commands.Cog):
 
             output += quote
 
-        f = open("quotes.data", "w")
+        f = open("quotes.csv", "w")
         f.write(output)
         f.close()
-        await ctx.send('Full quotes list in format: id, "quote", "author"', file=discord.File('quotes.data'))
-        os.remove("quotes.data")
+        await ctx.send('Full quotes list in csv format:', file=discord.File('quotes.csv'))
+        os.remove("quotes.csv")
         connection.close()
-        
+
         print(f'Quotes data file sent in channel "{ctx.channel.name}", "{ctx.guild.name}"')
 
 async def setup(client):
